@@ -86,7 +86,6 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         coroutineScope.cancel()
-        Glide.with(mContext).pauseRequests()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -109,7 +108,11 @@ class MainActivity : AppCompatActivity() {
         val view: View
         return when (item.itemId) {
             R.id.action_setSource -> {
-                showPopup(mRvNewsArea, sourcesNamesList, R.id.action_setSource)
+                if(sourcesNamesList.size>0) {
+                    showPopup(mRvNewsArea, sourcesNamesList, R.id.action_setSource)
+                } else {
+                    Toast.makeText(this, "No sources on app. Try reset the app to update source list.", Toast.LENGTH_LONG).show()
+                }
                 true
             }
             R.id.action_setCountry -> {
@@ -230,6 +233,10 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.title = Constants.cSelectedNewsSourceCode.uppercase()
 
+        adapter = NewsAdapter(arrayListOf(), mContext)
+        mRvNewsArea.adapter = adapter
+        adapter.notifyDataSetChanged()
+
         mPbNews.visibility = View.VISIBLE
 
         if(cSelectedLanguage.isNullOrEmpty())
@@ -261,17 +268,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private suspend fun getNewsForSourceAsync(pIndex: Int){
-        val newsFromSource = fetchNewsForSourceAsync(sourcesIdsList[pIndex])
-        if (newsFromSource == null) {
-            runOnUiThread { Toast.makeText(mContext, mContext.getString(R.string.news_no_news_fetched), Toast.LENGTH_SHORT).show() }
-        }
-        newsFromSource?.articles?.let { articles ->
-            if(articles.isNullOrEmpty()){
+        if(sourcesIdsList.size > 0){
+            val newsFromSource = fetchNewsForSourceAsync(sourcesIdsList[pIndex])
+            if (newsFromSource == null) {
                 runOnUiThread { Toast.makeText(mContext, mContext.getString(R.string.news_no_news_fetched), Toast.LENGTH_SHORT).show() }
             }
-            else{
-                runOnUiThread { updateAdapter(articles) }
+            newsFromSource?.articles?.let { articles ->
+                if(articles.isNullOrEmpty()){
+                    runOnUiThread { Toast.makeText(mContext, mContext.getString(R.string.news_no_news_fetched), Toast.LENGTH_SHORT).show() }
+                }
+                else{
+                    updateAdapter(articles)
+                }
             }
+        } else {
+            clearAdapter()
+            runOnUiThread { Toast.makeText(mContext, mContext.getString(R.string.news_no_news_fetched), Toast.LENGTH_SHORT).show() }
         }
     }
 
@@ -285,7 +297,7 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread { Toast.makeText(mContext, mContext.getString(R.string.news_no_news_fetched), Toast.LENGTH_SHORT).show() }
             }
             else{
-                runOnUiThread { updateAdapter(articles) }
+                updateAdapter(articles)
             }
         }
     }
@@ -300,21 +312,36 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread { Toast.makeText(mContext, mContext.getString(R.string.news_no_news_fetched), Toast.LENGTH_SHORT).show() }
             }
             else{
-                runOnUiThread { updateAdapter(articles) }
+                updateAdapter(articles)
             }
         }
     }
 
-    private fun updateAdapter(pArticles:List<Article>){
-        if(Constants.cSearchBySourceCode)
-            supportActionBar?.title = Constants.cSelectedNewsSourceCode.uppercase()
-        else
+    private fun clearAdapter(){
+        runOnUiThread {
             supportActionBar?.title = getString(R.string.app_name)
+            adapter.clearData()
+        }
+    }
 
-        val sortedArticles = pArticles.sortedByDescending { it.publishedAt }
-        adapter = NewsAdapter(sortedArticles, mContext)
-        mRvNewsArea.adapter = adapter
-        adapter.notifyDataSetChanged()
+    private fun updateAdapter(pArticles:List<Article>){
+        runOnUiThread {
+            if (Constants.cSearchBySourceCode)
+                supportActionBar?.title = Constants.cSelectedNewsSourceCode.uppercase()
+            else
+                supportActionBar?.title = getString(R.string.app_name)
+
+            val sortedArticles = pArticles.sortedByDescending { it.publishedAt }
+            if(adapter == null) {
+                adapter = NewsAdapter(sortedArticles, mContext)
+                mRvNewsArea.adapter = adapter
+                adapter.notifyDataSetChanged()
+            } else {
+                adapter.applyNewData(pArticles)
+            }
+
+            mRvNewsArea.scrollToPosition(0)
+        }
     }
 
     private fun showPopup(view: View, itemList: List<String>, action: Int) {
@@ -344,9 +371,10 @@ class MainActivity : AppCompatActivity() {
 
         val adapter = PopupAdapter(itemList, object : PopupAdapter.OnItemClickListener {
             override fun onItemClick(item: Int) {
+                clearAdapter()
+                mPbNews.visibility = View.VISIBLE
                 when(action){
                     R.id.action_setSource -> {
-                        mPbNews.visibility = View.VISIBLE
                         coroutineScope.launch {
                             runBlocking {
                                 if(sourcesIdsList[item] != Constants.cSelectedNewsSourceCode){
@@ -361,7 +389,6 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                     R.id.action_setCountry -> {
-                        mPbNews.visibility = View.VISIBLE
                         coroutineScope.launch {
                             runBlocking {
                                 Constants.cSearchBySourceCode = false
@@ -390,7 +417,7 @@ class MainActivity : AppCompatActivity() {
         builder.setView(input)
 
         builder.setPositiveButton(getString(R.string.news_popup_search)) { dialog: DialogInterface, _: Int ->
-            val userInput = input.text.toString()
+            clearAdapter()
             mPbNews.visibility = View.VISIBLE
             coroutineScope.launch {
                 runBlocking {
