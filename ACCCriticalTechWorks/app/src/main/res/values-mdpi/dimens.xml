@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_margin">8dp</dimen>
+
+    <dimen name="min_spinner">60dp</dimen>
+
+    <dimen name="news_item_margin">6dp</dimen>
+    <integer name="news_item_max_lines_content">14</integer>
+    <dimen name="news_item_margin_top_landscape">8dp</dimen>
+    <dimen name="news_item_margin_divider">15dp</dimen>
+    <integer name="news_item_image_round_corners">8</integer>
+
+    <dimen name="main_popup_text_size">16sp</dimen>
+</resources>

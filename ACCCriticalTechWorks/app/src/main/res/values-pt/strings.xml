@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">ACCCriticalTechWorks (PT)</string>
+
+    <string name="app_ok">Ok</string>
+    <string name="app_cancel">Cancelar</string>
+    <string name="app_yes">Sim</string>
+    <string name="app_no">Não</string>
+
+    <string name="app_menu_set_source">Definir fonte</string>
+    <string name="app_menu_set_country">Definir pais</string>
+    <string name="app_menu_free_search">Procurar por...</string>
+
+    <string name="app_exit_title">Sair</string>
+    <string name="app_exit_description">Têm a certeza que quer sair?</string>
+
+    <string name="news_item_source_name">Fonte:</string>
+    <string name="news_item_author">Autor:</string>
+    <string name="news_item_title">Título:</string>
+    <string name="news_item_description">Descrição:</string>
+    <string name="news_item_link">Abrir a noticia</string>
+    <string name="news_item_published_at">Publicado em:</string>
+    <string name="news_item_content">Conteúdo:</string>
+
+    <string name="news_no_news_fetched">Não foram encontradas noticias.Va ao menu e aplique um novo filtro.</string>
+    <string name="news_item_link_clicked_error">Não foi encontrado nenhum navegador.</string>
+
+    <string name="news_popup_search">Procurar</string>
+    <string name="news_popup_search_text">Procurar por:</string>
+
+</resources>

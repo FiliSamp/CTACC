@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_news_item_main"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:paddingRight="10dp"
+    android:layout_margin="@dimen/news_item_margin">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_source_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/news_item_source_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_source_name_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_source_name"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/news_item_author"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_source_name_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_author_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_author"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/news_item_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_author_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_title_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/news_item_description"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_title_value"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_description_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_description"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_news_item_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/news_item_link"
+        android:layout_marginTop="@dimen/news_item_margin_top_landscape"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guideline"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_news_item_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/bt_news_item_link"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/guideline"
+        app:layout_constraintHeight_min="250dp"
+        app:layout_constraintHeight_max="450dp"
+        app:layout_constraintWidth_min="250dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_published_at"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/news_item_published_at"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_description_value"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_published_at_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_published_at"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/news_item_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_published_at_value"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_news_item_content_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="@integer/news_item_max_lines_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_news_item_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/guideline"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <View
+        android:id="@+id/v_news_item_space"
+        android:layout_width="8dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/iv_news_item_image" />
+
+    <View
+        android:id="@+id/v_news_item_divider"
+        android:layout_width="@dimen/news_item_height_divider"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/v_news_item_space" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

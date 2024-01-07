@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_margin">5dp</dimen>
+
+    <dimen name="min_spinner">40dp</dimen>
+
+    <dimen name="news_item_margin">2dp</dimen>
+    <integer name="news_item_max_lines_content">8</integer>
+    <dimen name="news_item_margin_top_landscape">5dp</dimen>
+    <dimen name="news_item_margin_divider">10dp</dimen>
+    <dimen name="news_item_height_divider">2dp</dimen>
+    <integer name="news_item_image_round_corners">5</integer>
+
+    <dimen name="main_popup_text_size">12sp</dimen>
+
+</resources>
